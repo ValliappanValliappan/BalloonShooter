@@ -2,9 +2,7 @@
 //  AppDelegate.swift
 //  BalloonShooter
 //
-//  Created by Chettiar Valliappan, Valliappan on 11/11/17.
-//  Copyright © 2017 Ratan. All rights reserved.
-//
+
 
 import UIKit
 
