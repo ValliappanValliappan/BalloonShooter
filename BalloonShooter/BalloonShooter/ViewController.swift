@@ -58,6 +58,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         return node
     }
 */
+    func createEgg(position: SCNVector3) {
+        
+    }
     
     func session(_ session: ARSession, didFailWithError error: Error) {
         // Present an error message to the user
