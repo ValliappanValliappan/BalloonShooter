@@ -78,3 +78,32 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
     }
 }
+class Beginning:UIViewController{
+    @IBOutlet var radius: UITextField!
+    let maxRadius=3.0
+    @IBAction func help(_ sender: Any) {
+        let help=HelpViewController()
+        present(help, animated: true, completion: nil)
+    }
+    @IBAction func start(_ sender: UIButton) {
+        if(Double(radius.text!)!<=maxRadius){
+            let next=ViewController()
+            present(next, animated: true, completion: nil)
+        }
+    }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Release any cached data, images, etc that aren't in use.
+    }
+
+}
+class HelpViewController:UIViewController{
+    
+    @IBAction func goBack(_ sender: Any) {
+        let back=Beginning()
+        present(back, animated: true, completion: nil)
+    }
+}
