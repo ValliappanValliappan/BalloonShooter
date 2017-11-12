@@ -5,10 +5,10 @@ import UIKit
 import SceneKit
 import ARKit
 
-class ViewController: UIViewController, ARSCNViewDelegate {
+class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
 
     @IBOutlet var sceneView: ARSCNView!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -20,10 +20,17 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         // Create a new scene
         let scene = SCNScene(named: "art.scnassets/ship.scn")!
-        
+        //
         // Set the scene to the view
+        var cupnode=SCNNode(geometry: SCNCylinder(radius: 0.02, height: 0.1))
+        var transform=sceneView.session.currentFrame?.camera.transform
         sceneView.scene = scene
-        
+        var i=0
+        //while i==0{
+         //   transform = sceneView.session.currentFrame?.camera.transform
+         //   cupnode.position=SCNVector3Make((transform?.columns.3.x)!, (transform?.columns.3.y)!, (transform?.columns.3.z)!)
+        //    sceneView.scene.rootNode.addChildNode(cupnode)
+        //}
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -58,10 +65,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         return node
     }
 */
-    
-    
     func createEgg() {
-            let egg = SCNScene(named: "art.scnassets/egg.obj")!
+        let egg = SCNScene(named: "art.scnassets/egg.obj")!
             let eggnode = SCNNode()
             for child in egg.rootNode.childNodes {
                 eggnode.addChildNode(child)
@@ -75,10 +80,10 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             sceneView.scene.rootNode.addChildNode(eggnode)
     }
     func game() {
-        let a = 5
-        while a <= 5 {
+        var a = 5
+        while a >= 0 {
             createEgg()
-            a - 1
+            a -= 1
         }
     }
     
