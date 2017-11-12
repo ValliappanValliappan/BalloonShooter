@@ -35,7 +35,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     }
     func followCamera(){
         var cupnode=SCNNode(geometry: SCNCylinder(radius: 0.02, height: 0.1))
-        
         transform = sceneView.session.currentFrame?.camera.transform
         cupnode.position=SCNVector3Make((transform?.columns.3.x)!, (transform?.columns.3.y)!, (transform?.columns.3.z)!)
         sceneView.scene.rootNode.addChildNode(cupnode)
@@ -73,8 +72,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     }
 */
     func createEgg() {
-        //let egg = MDLAsset(url: "art.scnassets/egg.obj")
-        let egg = SCNScene(named: "art.scnassets/egg.scn")!
+            let egg = SCNScene(named: "Egg.scn")!
             let eggnode = SCNNode()
             for child in egg.rootNode.childNodes {
                 eggnode.addChildNode(child)
@@ -84,7 +82,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             let number = Int(arc4random_uniform(UInt32(B - A + 1))) + A
             Float32(number)
             eggnode.position = SCNVector3(number, -1, -2)
-            eggnode.scale = SCNVector3(0.01, 0.01, 0.01)
+            eggnode.scale = SCNVector3(0.09, 0.09, 0.09)
             sceneView.scene.rootNode.addChildNode(eggnode)
     }
     func game() {
