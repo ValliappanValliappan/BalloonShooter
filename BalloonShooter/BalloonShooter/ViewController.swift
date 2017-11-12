@@ -58,19 +58,26 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         return node
     }
 */
-    func eggMath() {
-        
-    }
     
-    func createEgg(position: SCNVector3) {
-        func createEgg(position: SCNVector3) {
-            let egg = SCNScene(named: "art.scnassests/egg.obj")!
+    
+    func createEgg() {
             let eggnode = SCNNode()
-            for child in egg.rootNode.childNodes {
+            for child in sceneView.scene.rootNode.childNodes {
                 eggnode.addChildNode(child)
             }
-            eggnode.position = SCNVector3(0, -1, -2)
+            let A: Int = -1 // UInt32 = 32-bit positive integers (unsigned)
+            let B: Int = 1
+            let number = Int(arc4random_uniform(UInt32(B - A + 1))) + A
+            Float32(number)
+            eggnode.position = SCNVector3(number, -1, -2)
+            eggnode.scale = SCNVector3(0.01, 0.01, 0.01)
             sceneView.scene.rootNode.addChildNode(eggnode)
+    }
+    func game() {
+        let a = 5
+        while a == 5 {
+            createEgg()
+            a - 1
         }
     }
     
