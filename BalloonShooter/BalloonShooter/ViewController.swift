@@ -8,19 +8,19 @@ import ARKit
 class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
 
     @IBOutlet var sceneView: ARSCNView!
-
+    var transform : matrix_float4x4!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        //transform=sceneView.session.currentFrame?.camera.transform
         // Set the view's delegate
         sceneView.delegate = self
         
         // Show statistics such as fps and timing information
         sceneView.showsStatistics = true
-        
-        // Create a new scene
         let scene = SCNScene(named: "art.scnassets/ship.scn")!
-        //
+        sceneView.scene = scene
+        
         // Set the scene to the view
         var cupnode=SCNNode(geometry: SCNCylinder(radius: 0.02, height: 0.1))
         var transform=sceneView.session.currentFrame?.camera.transform
@@ -33,7 +33,13 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         //}
         game()
     }
-    
+    func followCamera(){
+        var cupnode=SCNNode(geometry: SCNCylinder(radius: 0.02, height: 0.1))
+        
+        transform = sceneView.session.currentFrame?.camera.transform
+        cupnode.position=SCNVector3Make((transform?.columns.3.x)!, (transform?.columns.3.y)!, (transform?.columns.3.z)!)
+        sceneView.scene.rootNode.addChildNode(cupnode)
+    }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -67,7 +73,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     }
 */
     func createEgg() {
-            let egg = SCNScene(named: "art.scnassets/egg.obj")!
+        let egg = MDLAsset(url: "art.scnassets/egg.obj")
+        //let egg = SCNScene(named: "art.scnassets/egg.obj")!
             let eggnode = SCNNode()
             for child in egg.rootNode.childNodes {
                 eggnode.addChildNode(child)
