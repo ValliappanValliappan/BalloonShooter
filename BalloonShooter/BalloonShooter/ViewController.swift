@@ -31,6 +31,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
          //   cupnode.position=SCNVector3Make((transform?.columns.3.x)!, (transform?.columns.3.y)!, (transform?.columns.3.z)!)
         //    sceneView.scene.rootNode.addChildNode(cupnode)
         //}
+        game()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -66,7 +67,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     }
 */
     func createEgg() {
-        let egg = SCNScene(named: "art.scnassets/egg.obj")!
+            let egg = SCNScene(named: "art.scnassets/egg.obj")!
             let eggnode = SCNNode()
             for child in egg.rootNode.childNodes {
                 eggnode.addChildNode(child)
