@@ -22,23 +22,27 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         sceneView.scene = scene
         
         // Set the scene to the view
-        var cupnode=SCNNode(geometry: SCNCylinder(radius: 0.02, height: 0.1))
-        var transform=sceneView.session.currentFrame?.camera.transform
+        let cupnode=SCNNode()
+        let cupScene=SCNScene(named: "Bucket.scn")!
+        for child in cupScene.rootNode.childNodes {
+            cupnode.addChildNode(child)
+        }
+        //cupnode.position=SCNVector3Make(0.1, 0.1, 0.1)
+        //scene.rootNode.addChildNode(cupnode)
+        cupnode.scale=SCNVector3(0.005,0.005,0.005)
+        //cupnode.position=SCNVector3Make(-0.5, 0, 0)
+        sceneView.pointOfView?.addChildNode(cupnode)
+        
         sceneView.scene = scene
-        var i=0
-        //while i==0{
-         //   transform = sceneView.session.currentFrame?.camera.transform
-         //   cupnode.position=SCNVector3Make((transform?.columns.3.x)!, (transform?.columns.3.y)!, (transform?.columns.3.z)!)
-        //    sceneView.scene.rootNode.addChildNode(cupnode)
-        //}
+        sceneView.allowsCameraControl=true
+        
+        //var cupnode=SCNNode()
+        sceneView.scene.rootNode.addChildNode(cupnode)
+
         game()
     }
     func followCamera(){
-        var cupnode=SCNNode(geometry: SCNCylinder(radius: 0.02, height: 0.1))
-        transform = sceneView.session.currentFrame?.camera.transform
-        cupnode.position=SCNVector3Make((transform?.columns.3.x)!, (transform?.columns.3.y)!, (transform?.columns.3.z)!)
-        sceneView.scene.rootNode.addChildNode(cupnode)
-    }
+            }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -85,8 +89,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         eggnode.scale = SCNVector3(0.09, 0.09, 0.09)
         sceneView.scene.rootNode.addChildNode(eggnode)
         eggnode.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
-        if eggnode.position.y <= -30 {
-            eggnode.removeAllActions()
+        if eggnode.position.z <= -5 {
+            eggnode.physicsBody = SCNPhysicsBody(type: SCNPhysicsBodyType.static, shape: nil)
         }
     }
     func game() {
