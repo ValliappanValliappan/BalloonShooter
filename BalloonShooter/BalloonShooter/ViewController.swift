@@ -5,12 +5,10 @@ import UIKit
 import SceneKit
 import ARKit
 
-class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SCNSceneRendererDelegate {
+class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
 
     @IBOutlet var sceneView: ARSCNView!
     var transform : matrix_float4x4!
-    var targetCreationTime:TimeInterval = 0
-    let egg = SCNScene(named: "Egg.scn")!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,21 +34,12 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         sceneView.pointOfView?.addChildNode(cupnode)
         
         sceneView.scene = scene
-
         sceneView.allowsCameraControl=true
         
         //var cupnode=SCNNode()
         sceneView.scene.rootNode.addChildNode(cupnode)
 
-
-        var i=0
-
-        //while i==0{
-         //   transform = sceneView.session.currentFrame?.camera.transform
-         //   cupnode.position=SCNVector3Make((transform?.columns.3.x)!, (transform?.columns.3.y)!, (transform?.columns.3.z)!)
-        //    sceneView.scene.rootNode.addChildNode(cupnode)
-        //}
-
+        game()
     }
     func followCamera(){
             }
@@ -87,6 +76,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
     }
 */
     func createEgg() {
+        let egg = SCNScene(named: "Egg.scn")!
         let eggnode = SCNNode()
         for child in egg.rootNode.childNodes {
             eggnode.addChildNode(child)
@@ -95,7 +85,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         let B: Int = 1
         let number = Int(arc4random_uniform(UInt32(B - A + 1))) + A
         Float32(number)
-        eggnode.position = SCNVector3(number, -1, 10)
+        eggnode.position = SCNVector3(number, -1, -2)
         eggnode.scale = SCNVector3(0.09, 0.09, 0.09)
         sceneView.scene.rootNode.addChildNode(eggnode)
         eggnode.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
@@ -103,19 +93,11 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
             eggnode.physicsBody = SCNPhysicsBody(type: SCNPhysicsBodyType.static, shape: nil)
         }
     }
-    func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
-        if time > targetCreationTime {
+    func game() {
+        var a = 5
+        while a >= 0 {
             createEgg()
-            targetCreationTime = time + 0.6
-        }
-        cleanUp()
-    }
-    
-    func cleanUp() {
-        for node in egg.rootNode.childNodes {
-            if node.presentation.position.y < -5 {
-                node.removeFromParentNode()
-            }
+            a -= 1
         }
     }
     
@@ -123,7 +105,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, SC
         // Present an error message to the user
         
     }
-    
     
     func sessionWasInterrupted(_ session: ARSession) {
         // Inform the user that the session has been interrupted, for example, by presenting an overlay
