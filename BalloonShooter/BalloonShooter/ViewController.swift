@@ -58,8 +58,19 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         return node
     }
 */
-    func createEgg(position: SCNVector3) {
+    func eggMath() {
         
+    }
+    
+    func createEgg(position: SCNVector3) {
+        let egg = SCNScene(named: "art.scnassests/egg.obj")!
+        let eggnode = SCNNode()
+        for child in egg.rootNode.childNodes {
+            eggnode.addChildNode(child)
+        }
+        eggnode.position = SCNVector3(0, -1, -2)
+        eggnode.scale = SCNVector3(0.2, 0.2, 0.2)
+        sceneView.scene.rootNode.addChildNode(eggnode)
     }
     
     func session(_ session: ARSession, didFailWithError error: Error) {
