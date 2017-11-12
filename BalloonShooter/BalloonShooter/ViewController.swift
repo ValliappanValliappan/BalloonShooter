@@ -61,8 +61,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     
     func createEgg() {
+            let egg = SCNScene(named: "art.scnassets/egg.obj")!
             let eggnode = SCNNode()
-            for child in sceneView.scene.rootNode.childNodes {
+            for child in egg.rootNode.childNodes {
                 eggnode.addChildNode(child)
             }
             let A: Int = -1 // UInt32 = 32-bit positive integers (unsigned)
@@ -75,7 +76,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
     func game() {
         let a = 5
-        while a == 5 {
+        while a <= 5 {
             createEgg()
             a - 1
         }
