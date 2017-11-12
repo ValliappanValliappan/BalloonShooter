@@ -69,7 +69,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             eggnode.addChildNode(child)
         }
         eggnode.position = SCNVector3(0, -1, -2)
-        eggnode.scale = SCNVector3(0.2, 0.2, 0.2)
         sceneView.scene.rootNode.addChildNode(eggnode)
     }
     
