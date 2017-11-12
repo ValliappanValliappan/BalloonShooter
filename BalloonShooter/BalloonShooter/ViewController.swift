@@ -73,8 +73,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     }
 */
     func createEgg() {
-        let egg = MDLAsset(url: "art.scnassets/egg.obj")
-        //let egg = SCNScene(named: "art.scnassets/egg.obj")!
+        //let egg = MDLAsset(url: "art.scnassets/egg.obj")
+        let egg = SCNScene(named: "art.scnassets/egg.scn")!
             let eggnode = SCNNode()
             for child in egg.rootNode.childNodes {
                 eggnode.addChildNode(child)
