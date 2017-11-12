@@ -85,6 +85,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         eggnode.scale = SCNVector3(0.09, 0.09, 0.09)
         sceneView.scene.rootNode.addChildNode(eggnode)
         eggnode.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
+        if eggnode.position.y <= -30 {
+            eggnode.removeAllActions()
+        }
     }
     func game() {
         var a = 5
