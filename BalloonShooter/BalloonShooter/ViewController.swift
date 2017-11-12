@@ -72,18 +72,19 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     }
 */
     func createEgg() {
-            let egg = SCNScene(named: "Egg.scn")!
-            let eggnode = SCNNode()
-            for child in egg.rootNode.childNodes {
-                eggnode.addChildNode(child)
-            }
-            let A: Int = -1 // UInt32 = 32-bit positive integers (unsigned)
-            let B: Int = 1
-            let number = Int(arc4random_uniform(UInt32(B - A + 1))) + A
-            Float32(number)
-            eggnode.position = SCNVector3(number, -1, -2)
-            eggnode.scale = SCNVector3(0.09, 0.09, 0.09)
-            sceneView.scene.rootNode.addChildNode(eggnode)
+        let egg = SCNScene(named: "Egg.scn")!
+        let eggnode = SCNNode()
+        for child in egg.rootNode.childNodes {
+            eggnode.addChildNode(child)
+        }
+        let A: Int = -1 // UInt32 = 32-bit positive integers (unsigned)
+        let B: Int = 1
+        let number = Int(arc4random_uniform(UInt32(B - A + 1))) + A
+        Float32(number)
+        eggnode.position = SCNVector3(number, -1, -2)
+        eggnode.scale = SCNVector3(0.09, 0.09, 0.09)
+        sceneView.scene.rootNode.addChildNode(eggnode)
+        eggnode.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
     }
     func game() {
         var a = 5
